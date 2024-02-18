@@ -1,16 +1,23 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
-};
+import React, { useState } from 'react';
+import ContactForm from './ContactForm';
+import styles from './App.module.css';
+
+class App extends React.Component {
+  state = {
+    contacts: [],
+  };
+
+  render() {
+    return (
+      <div className={styles.container}>
+        <h1>Phonebook</h1>
+        <ContactForm
+          contacts={this.state.contacts}
+          setContacts={contacts => this.setState({ contacts })}
+        />
+      </div>
+    );
+  }
+}
+
+export default App;
