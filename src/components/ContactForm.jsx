@@ -5,11 +5,16 @@ import styles from './ContactForm.module.css';
 const ContactForm = ({ contacts, setContacts }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [filter, setFilter] = useState('');
+
   const handleNameChange = e => {
     setName(e.target.value);
   };
   const handleNumberChange = e => {
     setNumber(e.target.value);
+  };
+  const handleFilterChange = e => {
+    setFilter(e.target.value.toLowerCase());
   };
 
   const addContact = () => {
@@ -24,11 +29,13 @@ const ContactForm = ({ contacts, setContacts }) => {
       setNumber('');
     }
   };
-
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter)
+  );
   return (
     <div>
       <div className={styles.form}>
-        <p>Name</p>
+        <label>Name</label>
         <input
           className={styles.input}
           type="text"
@@ -39,7 +46,7 @@ const ContactForm = ({ contacts, setContacts }) => {
           value={name}
           onChange={handleNameChange}
         />
-        <p>Number</p>
+        <label>Number</label>
         <input
           className={styles.input}
           type="tel"
@@ -55,9 +62,16 @@ const ContactForm = ({ contacts, setContacts }) => {
         </button>
       </div>
       <h2>Contacts</h2>
-
+      <h3>Find contacts by name</h3>
+      <input
+        className={styles.input}
+        type="text"
+        placeholder="Search by name"
+        value={filter}
+        onChange={handleFilterChange}
+      />
       <ul>
-        {contacts.map(contact => (
+        {filteredContacts.map(contact => (
           <li key={contact.id}>
             {contact.name}: {contact.number}
           </li>
