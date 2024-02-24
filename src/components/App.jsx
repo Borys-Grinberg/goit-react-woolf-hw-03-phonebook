@@ -1,4 +1,3 @@
-// src/components/App.jsx
 import React, { useState } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
