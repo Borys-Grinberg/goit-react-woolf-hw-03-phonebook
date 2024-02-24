@@ -1,8 +1,8 @@
-//src/components/ContactForm.js
+// src/components/ContactForm.js
 import React, { useState } from 'react';
 import styles from './ContactForm.module.css';
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = ({ addContact, contacts }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -16,9 +16,22 @@ const ContactForm = ({ addContact }) => {
 
   const handleAddContact = () => {
     if (name.trim() !== '' && number.trim() !== '') {
-      addContact(name.trim(), number.trim());
-      setName('');
-      setNumber('');
+      // Check if the name already exists in contacts
+      const isNameExists = contacts.some(
+        contact => contact.name.toLowerCase() === name.trim().toLowerCase()
+      );
+
+      if (isNameExists) {
+        alert(
+          `Contact with name "${name}" already exists! Please choose a different name.`
+        );
+      } else {
+        addContact(name.trim(), number.trim());
+        setName('');
+        setNumber('');
+      }
+    } else {
+      alert('Please enter both name and number.');
     }
   };
 

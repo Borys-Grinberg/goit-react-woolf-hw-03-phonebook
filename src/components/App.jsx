@@ -1,4 +1,4 @@
-//src/components/App.jsx
+// src/components/App.jsx
 import React, { useState } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
@@ -30,7 +30,7 @@ const App = () => {
   return (
     <div className={styles.container}>
       <h1>Phonebook</h1>
-      <ContactForm addContact={addContact} />
+      <ContactForm addContact={addContact} contacts={contacts} />
 
       <h2>Contacts</h2>
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
