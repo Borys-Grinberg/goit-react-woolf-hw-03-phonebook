@@ -23,6 +23,11 @@ const App = () => {
     setFilter(e.target.value.toLowerCase());
   };
 
+  const deleteContact = id => {
+    const updatedContacts = contacts.filter(contact => contact.id !== id);
+    setContacts(updatedContacts);
+  };
+
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter)
   );
@@ -34,7 +39,7 @@ const App = () => {
 
       <h2>Contacts</h2>
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
-      <ContactList contacts={filteredContacts} />
+      <ContactList contacts={filteredContacts} deleteContact={deleteContact} />
     </div>
   );
 };
