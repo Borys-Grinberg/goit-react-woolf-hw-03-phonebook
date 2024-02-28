@@ -1,6 +1,7 @@
 .button {
   border-color: gray;
   border-radius: 5px;
+  background-color: white;
   padding: 2px;
 }
 
