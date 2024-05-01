@@ -6,13 +6,10 @@ import { nanoid } from 'nanoid';
 import styles from './App.module.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      contacts: [],
-      filter: '',
-    };
-  }
+  state = {
+    contacts: [],
+    filter: '',
+  };
 
   componentDidMount() {
     const savedContacts = localStorage.getItem('contacts');
@@ -28,14 +25,24 @@ class App extends Component {
   }
 
   addContact = (name, number) => {
-    const newContact = {
-      id: nanoid(),
-      name,
-      number,
-    };
-    this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
-    }));
+    const isContactExists = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === name.trim().toLowerCase()
+    );
+
+    if (!isContactExists) {
+      const newContact = {
+        id: nanoid(),
+        name,
+        number,
+      };
+      this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
+    } else {
+      alert(
+        `Contact with name "${name}" already exists! Please choose a different name.`
+      );
+    }
   };
 
   handleFilterChange = e => {
